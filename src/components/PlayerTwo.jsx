@@ -4,14 +4,14 @@ import "./styles.css";
 function PlayerTwo() {
     // State to store the indices of clicked icons
     const [clickedIndices, setClickedIndices] = useState([]);
-
+    var newIndices_p2
     // Function to handle click events on the icons
     const handleIconClick = (index) => {
         setClickedIndices((prevIndices) => {
             // Check if the index already exists in the array
             if (!prevIndices.includes(index)) {
                 // Add the index to the array if it's not already clicked
-                const newIndices_p2 = [...prevIndices, index];
+                newIndices_p2 = [...prevIndices, index];
                 // Log the new array of clicked indices
                 console.log('Selected Indices(player2):', newIndices_p2);
                 return newIndices_p2;
@@ -29,7 +29,7 @@ function PlayerTwo() {
 
     return (
         <div className="border-black border-4 rounded-xl p-1 flex flex-wrap w-1/2">
-            {Array.from({ length:   16 }, (_, index) => (
+            {Array.from({ length:   25 }, (_, index) => (
                 <div
                     key={index}
                     onClick={() => handleIconClick(index)}
@@ -47,7 +47,7 @@ function PlayerTwo() {
                         }
                     }}
                     id={`icon2-${index}`}
-                    className="relative bg-blue-500 rounded-md border-2 border-black w-1/4"
+                    className="relative bg-blue-500 rounded-md border-2 border-black w-1/5"
                 ></div>
             ))}
         </div>
