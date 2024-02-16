@@ -28,7 +28,7 @@ function PlayerOne() {
 
     return (
         <div className="border-black border-4 rounded-xl p-1 flex flex-wrap w-1/2">
-            {Array.from({ length:   16 }, (_, index) => (
+            {Array.from({ length:   25 }, (_, index) => (
                 <div
                     key={index}
                     onClick={() => handleIconClick(index)}
@@ -46,7 +46,7 @@ function PlayerOne() {
                         }
                     }}
                     id={`icon1-${index}`}
-                    className="relative bg-red-500 rounded-md border-2 border-black w-1/4"
+                    className="relative bg-red-500 rounded-md border-2 border-black w-1/5"
                 ></div>
             ))}
         </div>
