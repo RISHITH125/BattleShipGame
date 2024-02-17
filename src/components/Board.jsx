@@ -1,6 +1,9 @@
 import PlayerOne from './PlayerOne';
 import PlayerTwo from './PlayerTwo';
+import { AppContext } from "../App.jsx";
+import { useContext } from 'react';
 function Board() {
+  const { username, socket } = useContext(AppContext);
   return (
     <>
       <div className="monitor h-screen w-full flex flex-col p-1 gap-1">
@@ -10,7 +13,7 @@ function Board() {
         </div>
         {/* second segment */}
         <div className="relative flex flex-1">
-          <PlayerOne/>
+          <PlayerOne username={username} socket={socket}/>
           <PlayerTwo/>
         </div>
       </div>

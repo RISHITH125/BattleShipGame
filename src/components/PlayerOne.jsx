@@ -1,8 +1,10 @@
 import { useState } from "react";
 import "./styles.css";
-
+import { useContext } from "react";
+import { AppContext } from "../App.jsx";
 function PlayerOne() {
-    // State to store the indices of clicked icons
+    
+    const { username, socket } = useContext(AppContext);
     const [clickedIndices, setClickedIndices] = useState([]);
 
     // Function to handle click events on the icons
