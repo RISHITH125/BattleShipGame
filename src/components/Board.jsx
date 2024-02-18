@@ -11,6 +11,7 @@ function Board() {
   useEffect(() => {
     const handleMessage = (event) => {
       const message = JSON.parse(event.data);
+      console.log(message)
       switch (message.action) {
         case "BroadCastName":
           setP1UserName(message.player1);
