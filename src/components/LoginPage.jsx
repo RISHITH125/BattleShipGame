@@ -1,18 +1,16 @@
-import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import { AppContext } from "../App.jsx";
+import { useContext } from 'react';
 
-function LoginPage({ setUsername}) {
+function LoginPage() {
+  const { setUsername } = useContext(AppContext);
   let navigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Redirect to the board after successful login
-    // window.location.href = '/board';
-    navigate("/room");
-  };
-
-  const handleButtonClick = () => {
-    // Update the username state when the button is clicked
-    setUsername(document.getElementById('username').value);
+    const usernameInput = document.getElementById('username').value;
+    setUsername(usernameInput); // Set the username before navigating
+    navigate("/room"); // Now navigate to the Room component
   };
 
   return (
@@ -43,7 +41,6 @@ function LoginPage({ setUsername}) {
           <div>
             <button
               type="submit"
-              onClick={handleButtonClick}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
             >
               Lets Begin!
@@ -54,10 +51,5 @@ function LoginPage({ setUsername}) {
     </div>
   );
 }
-
-LoginPage.propTypes = {
-  setUsername: PropTypes.func.isRequired,
-  socket: PropTypes.instanceOf(WebSocket).isRequired,
-};
 
 export default LoginPage;
