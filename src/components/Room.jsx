@@ -12,7 +12,6 @@ function Room() {
   useEffect(() => {
     if (socket) {
       console.log("web socket connected");
-
       const handleMessage = async (event) => {
         try {
           const message = JSON.parse(event.data);
@@ -23,6 +22,7 @@ function Room() {
               break;
             case "Waiting for the player2":
               setWaitingForPlayer2(true);
+              setRoomId(message.RoomId)
               break;
             default:
               console.log('Unknown action:', message.action);
@@ -32,15 +32,14 @@ function Room() {
         }
       };
 
-      // Use the onmessage event handler instead of socket.on
       socket.onmessage = handleMessage;
-
-      // Cleanup function to remove the event listener
       return () => {
         socket.onmessage = null;
       };
     }
   }, [navigate, socket, waitingForPlayer2]);
+
+
   const sendMessage = (action, data = {}) => {
     if (socket && socket.readyState === WebSocket.OPEN) {
       socket.send(JSON.stringify({ action, username, ...data }));
@@ -48,6 +47,7 @@ function Room() {
       console.error('WebSocket is not open. Cannot send message.');
     }
   };
+
 
   const handleCreateRoomClick = () => {
     sendMessage('create room');
@@ -65,9 +65,11 @@ function Room() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-900 py-12 px-4 sm:px-6 lg:px-8">
       {waitingForPlayer2 ? (
-        <h2 className="text-center text-3xl font-extrabold text-white">
-          Waiting for Player   2 . . .
-        </h2>
+        <div>
+          <h2 className="text-center text-3xl font-extrabold text-white"> Waiting for Player   2 . . . </h2>
+          <h3 className="text-center text-2xl font-bold text-red-400">Room ID :- {roomId}</h3>
+        </div>
+        
       ) : (
         <div className="max-w-md w-full space-y-8">
           <div>
