@@ -9,6 +9,19 @@ function Board() {
   const [P2UserName, setP2UserName] = useState('');
 
   useEffect(() => {
+    if (socket) {
+      const handleSocketClose = (event) => {
+        console.log('WebSocket connection closed:', event.reason);
+      };
+      socket.addEventListener('close', handleSocketClose);
+
+      return () => {
+        socket.removeEventListener('close', handleSocketClose);
+      };
+    }
+  }, [socket]);
+
+  useEffect(() => {
     const handleMessage = (event) => {
       const message = JSON.parse(event.data);
       console.log(message)
@@ -21,20 +34,33 @@ function Board() {
           console.log('Unknown action:', message.action);
       }
     };
-
-    socket.addEventListener('message', handleMessage);
+  
+    if (socket) {
+      if (socket.readyState === WebSocket.OPEN) {
+        socket.addEventListener('message', handleMessage);
+      } else {
+        socket.addEventListener('open', () => {
+          socket.addEventListener('message', handleMessage);
+        });
+      }
+    }
+  
     return () => {
-      socket.removeEventListener('message', handleMessage);
+      if (socket) {
+        socket.removeEventListener('message', handleMessage);
+      }
     };
   }, [socket]);
-
   return (
     <>
       <div className="monitor h-screen w-full flex flex-col p-1 gap-1">
         {/* first segment */}
-        <div className="relative bg-gray-200 h-[20vh] border-black border-4 rounded-xl p-5 gap-4">
-                   
+        <div className="flex justify-between relative bg-gray-200 h-[20vh] border-black border-4 rounded-xl p-2 gap-4">
+          <h1 className="text-3xl text-center text-red-500">{P1UserName}</h1>
+          <h1 className="text-3xl text-center text-blue-500">{P2UserName}</h1>
         </div>
+       
+       
         {/* second segment */}
         <div className="relative flex flex-1">
           <PlayerOne P1UserName={P1UserName} socket={socket}/>

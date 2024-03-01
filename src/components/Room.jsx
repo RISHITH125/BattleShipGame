@@ -33,11 +33,11 @@ function Room() {
       };
 
       socket.onmessage = handleMessage;
-      return () => {
-        socket.onmessage = null;
-      };
+      // return () => {
+      //   socket.onmessage = null;
+      // };
     }
-  }, [navigate, socket, waitingForPlayer2]);
+  }, [navigate, socket, waitingForPlayer2,]);
 
 
   const sendMessage = (action, data = {}) => {
