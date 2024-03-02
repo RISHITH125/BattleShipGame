@@ -67,7 +67,7 @@ function Room() {
       {waitingForPlayer2 ? (
         <div>
           <h2 className="text-center text-3xl font-extrabold text-white"> Waiting for Player   2 . . . </h2>
-          <h3 className="text-center text-2xl font-bold text-red-400">Room ID :- {roomId}</h3>
+          <h3 className="text-center text-2xl font-bold text-red-600">Room ID :- {roomId}</h3>
         </div>
         
       ) : (
