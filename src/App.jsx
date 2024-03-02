@@ -14,16 +14,24 @@ function App() {
   const [socket, setSocket] = useState(null);
   const port =  4748;
 
+  const [P1UserName, setP1UserName] = useState('');
+  const [P2UserName, setP2UserName] = useState('')
+
   useEffect(() => {
     if (username) {
       const newSocket = new WebSocket(`ws://localhost:${port}?username=${encodeURIComponent(username)}`);
       setSocket(newSocket);
     }
+    return () => {
+      if (socket) {
+        socket.close();
+      }
+    }
   }, [username]);
 
   // Step  2: Use the Provider component to wrap your routes
   return (
-    <AppContext.Provider value={{ username, setUsername, socket, setSocket }}>
+    <AppContext.Provider value={{ username, setUsername, socket, setSocket ,P1UserName, setP1UserName,P2UserName, setP2UserName}}>
       <BrowserRouter>
         <Routes>
           <Route path="/board" element={<Board />} />

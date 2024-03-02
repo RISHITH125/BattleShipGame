@@ -1,12 +1,12 @@
 import PlayerOne from './PlayerOne';
 import PlayerTwo from './PlayerTwo';
 import { AppContext } from "../App.jsx";
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
 function Board() {
-  const { socket } = useContext(AppContext);
-  const [P1UserName, setP1UserName] = useState('');
-  const [P2UserName, setP2UserName] = useState('')
+  const { socket ,P1UserName, setP1UserName ,P2UserName, setP2UserName} = useContext(AppContext);
+  // const [P1UserName, setP1UserName] = useState('');
+  // const [P2UserName, setP2UserName] = useState('')
   useEffect(() => {
     if (socket && socket.readyState === WebSocket.OPEN) {
         const handleMessage = async(event) => {
@@ -38,9 +38,8 @@ function Board() {
     }
 
 
-  }, [socket]);
+  }, [socket,P1UserName,P2UserName,setP1UserName,setP2UserName]);
   return (
-    <>
       <div className="monitor h-screen w-full flex flex-col p-1 gap-1">
         {/* first segment */}
         <div className="flex justify-between bg-gray-200 h-[20vh] border-black border-4 rounded-xl p-2 gap-4">
@@ -55,7 +54,6 @@ function Board() {
           <PlayerTwo P2UserName={P2UserName} socket={socket}/>
         </div>
       </div>
-    </>
   );
 }
 
