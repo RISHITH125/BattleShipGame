@@ -5,40 +5,30 @@ import { useContext, useEffect } from 'react';
 
 function Board() {
   const { socket ,P1UserName, setP1UserName ,P2UserName, setP2UserName} = useContext(AppContext);
-  // const [P1UserName, setP1UserName] = useState('');
-  // const [P2UserName, setP2UserName] = useState('')
+
   useEffect(() => {
-    if (socket && socket.readyState === WebSocket.OPEN) {
-        const handleMessage = async(event) => {
-        try{
-          const message = JSON.parse(event.data);
-          console.log(message)
-          switch (message.action) {
-            case "BroadCastName":
-              setP1UserName(message.player1);
-              setP2UserName(message.player2);
-              break;
-            default:
-              console.log('Unknown action:', message.action);
-          }
+    const handleMessage =async(event) => {
+      try{
+        const message = JSON.parse(event.data);
+        console.log(message)
+        switch (message.action) {
+          case "BroadCastName":
+            setP1UserName(message.player1);
+            setP2UserName(message.player2);
+            break;
+          default:
+            console.log('Unknown action:', message.action);
         }
-        catch(error){
-          console.error('Error parsing WebSocket message:', error);
-        }
-      };
-    
-      // if (socket.readyState === WebSocket.OPEN) {
-      //   socket.onmessage = handleMessage
-      // } else {
-      //   socket.addEventListener('open', () => {
-      //     socket.addEventListener('message', handleMessage);
-      //   });
-      // }
-      socket.onmessage=handleMessage;
-    }
+      }
+      catch(error){
+        console.error('Error parsing WebSocket message:', error);
+      }
+    };
 
+    socket.onmessage = handleMessage;
 
-  }, [socket,P1UserName,P2UserName,setP1UserName,setP2UserName]);
+  }, [socket,setP1UserName,setP2UserName ]); // Removed P1UserName, P2UserName, setP1UserName, and setP2UserName from dependencies
+
   return (
       <div className="monitor h-screen w-full flex flex-col p-1 gap-1">
         {/* first segment */}
