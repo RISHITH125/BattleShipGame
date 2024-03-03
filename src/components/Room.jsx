@@ -33,9 +33,6 @@ function Room() {
       };
 
       socket.onmessage = handleMessage;
-      // return () => {
-      //   socket.onmessage = null;
-      // };
     }
   }, [navigate, socket, waitingForPlayer2,]);
 
@@ -78,7 +75,7 @@ function Room() {
             </h2>
           </div>
           {showRoomIdInput ? (
-            <form onSubmit={handleRoomIdSubmit} className="rounded-md shadow-sm -space-y-px">
+            <form onSubmit={handleRoomIdSubmit} className="rounded-md shadow-sm space-y-6">
               <div>
                 <label htmlFor="roomId" className="sr-only">Room ID</label>
                 <input
@@ -101,7 +98,7 @@ function Room() {
               </button>
             </form>
           ) : (
-            <div className="space-y-2">
+            <div className="space-y-6">
               <button
                 type="button"
                 onClick={handleCreateRoomClick}
