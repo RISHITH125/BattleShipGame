@@ -26,6 +26,7 @@ function Board() {
           console.error('Error parsing WebSocket message:', error);
         }
       };
+      console.log('PName', P1UserName, P2UserName)
     
       // if (socket.readyState === WebSocket.OPEN) {
       //   socket.onmessage = handleMessage
@@ -49,7 +50,7 @@ function Board() {
        
        
         {/* second segment */}
-        <div className="relative flex flex-1">
+        <div className={`relative flex flex-1 ${P2UserName ? 'opacity-50 pointer-events-none disabled:pointer-events-none disabled:opacity-50' : ''}`}>
           <PlayerOne P1UserName={P1UserName} socket={socket}/>
           <PlayerTwo P2UserName={P2UserName} socket={socket}/>
         </div>

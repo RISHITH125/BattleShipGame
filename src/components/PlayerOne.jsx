@@ -51,7 +51,7 @@ function PlayerOne() {
                         }
                     }}
                     id={`icon1-${index}`}
-                    className="relative bg-red-500 rounded-md border-2 border-black w-1/5"
+                    className={`relative bg-red-500 rounded-md border-2 border-black w-1/5 disabled:pointer-events-none ${clickedIndices.length > 6 ? 'opacity-50 pointer-events-none' : ''}`}
                 ></div>
             ))}
         </div>
