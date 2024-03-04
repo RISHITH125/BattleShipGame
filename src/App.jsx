@@ -22,11 +22,11 @@ function App() {
       const newSocket = new WebSocket(`ws://localhost:${port}?username=${encodeURIComponent(username)}`);
       setSocket(newSocket);
     }
-    return () => {
-      if (socket) {
-        socket.close();
-      }
-    }
+    // return () => {
+    //   if (socket) {
+    //     socket.close();
+    //   }
+    // }
   }, [username]);
 
   // Step  2: Use the Provider component to wrap your routes

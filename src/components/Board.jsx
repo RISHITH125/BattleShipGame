@@ -7,7 +7,7 @@ function Board() {
   const { socket ,P1UserName, setP1UserName ,P2UserName, setP2UserName} = useContext(AppContext);
 
   useEffect(() => {
-    const handleMessage =async(event) => {
+    const handleMessage = (event) => {
       try{
         const message = JSON.parse(event.data);
         console.log(message)
@@ -15,6 +15,9 @@ function Board() {
           case "BroadCastName":
             setP1UserName(message.player1);
             setP2UserName(message.player2);
+            break;
+          case "SelectShips":
+            // handle SelectShips action
             break;
           default:
             console.log('Unknown action:', message.action);
@@ -25,9 +28,11 @@ function Board() {
       }
     };
 
-    socket.onmessage = handleMessage;
+    if (socket) {
+      socket.onmessage = handleMessage;
+    }
 
-  }, [socket,setP1UserName,setP2UserName ]); // Removed P1UserName, P2UserName, setP1UserName, and setP2UserName from dependencies
+  }, [socket]); // Removed P1UserName, P2UserName from dependencies
 
   return (
       <div className="monitor h-screen w-full flex flex-col p-1 gap-1">
