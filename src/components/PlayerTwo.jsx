@@ -1,9 +1,10 @@
 import { useState } from "react";
 import "./styles.css";
 
-function PlayerTwo() {
+function PlayerTwo({P2UserName}) {
     // State to store the indices of clicked icons
     const [clickedIndices, setClickedIndices] = useState([]);
+
     var newIndices_p2
     // Function to handle click events on the icons
     const handleIconClick = (index) => {
@@ -21,14 +22,13 @@ function PlayerTwo() {
         });
     };
 
-
     // Function to determine the opacity based on whether the icon is clicked
     const getOpacity = (index) => {
         return clickedIndices.includes(index) ?   1 :   0.35;
     };
 
     return (
-        <div className="border-black border-4 rounded-xl p-1 flex flex-wrap w-1/2">
+        <div className={`border-black border-4 rounded-xl p-1 flex flex-wrap w-1/2 ${P2UserName ? 'opacity-50 pointer-events-none disabled:pointer-events-none disabled:opacity-50' : ''}`}>
             {Array.from({ length:   25 }, (_, index) => (
                 <div
                     key={index}

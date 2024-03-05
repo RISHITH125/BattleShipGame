@@ -1,14 +1,22 @@
 import { useState } from "react";
 import "./styles.css";
-// import { useContext } from "react";
-// import { AppContext } from "../App.jsx";
+import { useContext } from "react";
+import { AppContext } from "../App.jsx";
 function PlayerOne() {
-    // const { username, socket } = useContext(AppContext);
+    const { username, socket } = useContext(AppContext);
     // State to store the indices of clicked icons
 
     
 
     const [clickedIndices, setClickedIndices] = useState([]);
+
+    const sendMessage = (action, data = {}) => {
+        if (socket && socket.readyState === WebSocket.OPEN) {
+          socket.send(JSON.stringify({ action, username, ...data }));
+        } else {
+          console.error('WebSocket is not open. Cannot send message.');
+        }
+      };
 
     // Function to handle click events on the icons
     const handleIconClick = (index) => {
@@ -19,6 +27,10 @@ function PlayerOne() {
                 const newIndices_p1 = [...prevIndices, index];
                 // Log the new array of clicked indices
                 console.log('Selected Indices(player1):', newIndices_p1);
+                if(newIndices_p1.length > 6){
+                    sendMessage('ShipsSelectionComplete'); //sends msg when player is done selecting 7 ships.
+                    console.log('send msg to server')
+                }
                 return newIndices_p1;
             }
             // Return the previous indices if the index is already clicked
