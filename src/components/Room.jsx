@@ -18,7 +18,7 @@ function Room() {
           console.log(message);
           switch (message.action) {
             case "JoinedRoom":
-              setTimeout(() => navigate("/board"), 30);
+              navigate("/board");
               break;
             case "Waiting for the player2":
               setWaitingForPlayer2(true);
