@@ -3,14 +3,15 @@ import "./styles.css";
 import { useContext } from "react";
 import { AppContext } from "../App.jsx";
 function PlayerOne() {
-    const { username, socket } = useContext(AppContext);
+    const { socket } = useContext(AppContext);
     // State to store the indices of clicked icons
-    const [clickedIndices, setClickedIndices] = useState([]);
+    // const [clickedIndices, setClickedIndices] = useState([]);
+    const [selectedShips, setselectedShips] = useState([]);
     const [gameStarted, setGameStarted] = useState(false);
 
     const sendMessage = (action, data = {}) => {
         if (socket && socket.readyState === WebSocket.OPEN) {
-          socket.send(JSON.stringify({ action, username, ...data }));
+          socket.send(JSON.stringify({ action, selectedShips, ...data }));
         } else {
           console.error('WebSocket is not open. Cannot send message.');
         }
@@ -29,7 +30,7 @@ function PlayerOne() {
                     sendMessage('ShipsSelectionComplete'); //sends msg when player is done selecting 7 ships.
                     console.log('send msg to server');
                     setGameStarted(true);
-                    setClickedIndices([])
+                    setselectedShips([])
                 }
                 return newIndices_p1;
             }
