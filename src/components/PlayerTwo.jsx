@@ -1,7 +1,11 @@
 import { useState } from "react";
 import "./styles.css";
 
-function PlayerTwo({P2UserName}) {
+import PropTypes from "prop-types";
+
+function PlayerTwo({ P2UserName }) {
+    // Component code here
+
     // State to store the indices of clicked icons
     const [clickedIndices, setClickedIndices] = useState([]);
 
@@ -53,5 +57,9 @@ function PlayerTwo({P2UserName}) {
         </div>
     );
 }
+
+PlayerTwo.propTypes = {
+    P2UserName: PropTypes.string.isRequired,
+};
 
 export default PlayerTwo;

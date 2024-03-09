@@ -18,7 +18,7 @@ function PlayerOne() {
 
     // Function to handle click events on the icons
     const handleIconClick = (index) => {
-        setClickedIndices((prevIndices) => {
+        setselectedShips((prevIndices) => {
             // Check if the index already exists in the array
             if (!prevIndices.includes(index)) {
                 // Add the index to the array if it's not already clicked
@@ -44,7 +44,7 @@ function PlayerOne() {
 
     // Function to determine the opacity based on whether the icon is clicked
     const getOpacity = (index) => {
-        return clickedIndices.includes(index) ?   1 :   0.25;
+        return selectedShips.includes(index) ?   1 :   0.25;
     };
 
     return (
@@ -56,18 +56,18 @@ function PlayerOne() {
                     style={{ opacity: getOpacity(index) }}
                     onMouseEnter={() => {
                         // Only change the opacity to   0.5 on mouse enter if the icon is not clicked
-                        if (!clickedIndices.includes(index)) {
+                        if (!selectedShips.includes(index)) {
                             document.getElementById(`icon1-${index}`).style.opacity = '0.5';
                         }
                     }}
                     onMouseLeave={() => {
                         // Only reset the opacity to   0.25 on mouse leave if the icon is not clicked
-                        if (!clickedIndices.includes(index)) {
+                        if (!selectedShips.includes(index)) {
                             document.getElementById(`icon1-${index}`).style.opacity = '0.25';
                         }
                     }}
                     id={`icon1-${index}`}
-                    className={`relative bg-red-500 rounded-md border-2 border-black w-1/5 disabled:pointer-events-none ${clickedIndices.length > 6 ? 'opacity-50 pointer-events-none' : ''}`}
+                    className={`relative bg-red-500 rounded-md border-2 border-black w-1/5 disabled:pointer-events-none ${selectedShips.length > 6 ? 'opacity-50 pointer-events-none' : ''}`}
                 ></div>
             ))}
             {gameStarted && (
