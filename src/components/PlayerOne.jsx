@@ -26,7 +26,7 @@ function PlayerOne() {
                 // Add the index to the array if it's not already clicked
                 const newIndices_p1 = [...prevIndices, index];
                 // Log the new array of clicked indices
-                console.log('Selected Indices(player1):', newIndices_p1);
+                // console.log('Selected Indices(player1):', newIndices_p1);
                 if(newIndices_p1.length > 6){
                     sendMessage('ShipsSelectionComplete',newIndices_p1); //sends msg when player is done selecting 7 ships.
                     console.log('send msg to server')
