@@ -1,10 +1,10 @@
 import { useState } from "react";
 import "./styles.css";
-
+import { useContext } from "react";
 import PropTypes from "prop-types";
-
+import { AppContext } from "../App.jsx";
 function PlayerTwo({ P2UserName }) {
-    // Component code here
+    const { socket } = useContext(AppContext);
 
     // State to store the indices of clicked icons
     const [clickedIndices, setClickedIndices] = useState([]);
