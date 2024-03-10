@@ -3,13 +3,14 @@ import PlayerTwo from './PlayerTwo';
 import { AppContext } from "../App.jsx";
 import { useContext, useEffect, useState } from 'react';
 
+
 function Board() {
   const { socket ,P1UserName, setP1UserName ,P2UserName, setP2UserName} = useContext(AppContext);
   const [isPlayerOneTurn, setIsPlayerOneTurn] = useState(false);
   const [showOpponentsTurnPopup, setShowOpponentsTurnPopup] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [SelectShips, setSelectShips] = useState(false);
-
+  const [winner,setWinner]=useState(''); //to store the winner of the game
   useEffect(() => {
     const handleMessage = (event) => {
       try{
@@ -42,6 +43,9 @@ function Board() {
               setTimeout(() => {
                 setShowOpponentsTurnPopup(false); // Hide popup after 2 seconds
               }, 2000);
+              break;
+          case "Game over":
+              setWinner(message.whowin);
             break; 
           default:
             console.log('Unknown action:', message.action);
@@ -96,6 +100,14 @@ function Board() {
           <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-lg">
             <div className="bg-white p-8 rounded-lg text-center">
               <h1 className="text-4xl mb-4">Select your Ships !!!</h1>
+            </div>
+          </div>
+        )}
+        {winner && (
+          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-lg">
+            <div className="bg-white p-8 rounded-lg text-center">
+              <h1 className="text-4xl mb-4">{winner}</h1>
+              {/* <h1 className="text-4xl text-center mb-4">{winner}</h1> */}
             </div>
           </div>
         )}
