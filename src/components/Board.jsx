@@ -61,7 +61,7 @@ function Board() {
   return (
       <div className="monitor h-screen w-full flex flex-col p-1 gap-1">
         {/* first segment */}
-        <div className="flex justify-between h-[20vh] p-2 gap-4">
+        <div className="flex justify-between bg-gray-200 h-[20vh] border-black border-4 rounded-xl p-2 gap-4">
         <h1 className="text-3xl text-center text-red-500">{P1UserName}</h1>
         <h1 className="text-3xl text-center text-blue-500">{P2UserName}</h1>
       </div>
