@@ -51,7 +51,7 @@ function PlayerTwo({ P2UserName }) {
                         }
                     }}
                     id={`icon2-${index}`}
-                    className={`relative bg-blue-500 rounded-md border-2 border-black w-1/5 disabled:pointer-events-none disabled:opacity-50 ${clickedIndices.length > 6 ? 'opacity-50 pointer-events-none' : ''}`}
+                    className={`relative bg-blue-500 rounded-md border-2 border-black w-1/5 disabled:pointer-events-none <disabled:opacity-0></disabled:opacity-0> ${clickedIndices.length > 6 ? 'opacity-50 pointer-events-none' : ''}`}
                 ></div>
             ))}
         </div>
